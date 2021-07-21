@@ -10,12 +10,18 @@ public class player : MonoBehaviour
     bool nhay = false;
     public float lucnhay;
     public float tocdo;
-    public Rigidbody2D rigi;
+    public Rigidbody rigi;
     public Transform tranf;
     public static player instance;
     public BoxCollider2D ktnhay;
     public Animator anim;
-    Vector2 xoaydau;
+    Vector3 xoaydau;
+    Vector3 xoaydau2;
+    public Transform anhSangKiem;
+    Quaternion xoayKiem;
+    bool KTMatDat;
+    
+    
     public void Awake()
     {
         instance = this;
@@ -23,54 +29,69 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
-    // Update is called once per frame
-    void Update()
+    
+// Update is called once per frame
+    private void Update()
     {
-        
+
         // di chuyen , chem, nhay
-       
-        if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton ("phai"))
+        if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton("phai"))
         {
             transform.position = transform.position + new Vector3(1, 0, 0) * tocdo * Time.deltaTime;
+
+            //anim.enabled = false;
+
+            anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
+           
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
             xoaydau.x = 1;
-            transform.localScale = xoaydau;
+            if (transform.localScale.x != 1)
+                transform.localScale = xoaydau;
         }
-        else if (Input.GetKey(KeyCode.Z)  || CrossPlatformInputManager.GetButton ("trai"))
+        else if (Input.GetKey(KeyCode.Z) || CrossPlatformInputManager.GetButton("trai"))
         {
             transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
+
+            anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
             xoaydau.x = -1;
-            transform.localScale = xoaydau;
+            if (transform.localScale.x == 1)
+                transform.localScale = xoaydau;
+
         }
-        else 
+        else
         {
             anim.SetBool("chay", false);
         }
+
         if (Input.GetKeyDown (KeyCode.X) || CrossPlatformInputManager.GetButtonUp("danh"))
         {
             anim.SetTrigger("chem");
         }
-        if (Input.GetKey(KeyCode.S) && nhay == false || CrossPlatformInputManager.GetButtonUp("len") && nhay == false)
+        if (Input.GetKey(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButtonUp("len") && KTMatDat == false)
         {
-            nhay = true;
+            
             anim.SetBool ("nhay",true);
-            rigi.AddForce(transform.up * lucnhay * Time.deltaTime, ForceMode2D.Impulse);
+            rigi.AddForce(new Vector2 (0, 2f ) * lucnhay, ForceMode.Force);
+            KTMatDat = true;
         }
-
+        
+        Debug.Log(rigi.velocity.y);
+        Debug.Log(anim.GetBool("nhay"));
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (collision.tag == "MatDat")
+        if (collision.gameObject.tag == "KTMatDat")
         {
-            nhay = false;
+            KTMatDat = false;
             anim.SetBool("nhay", false);
         }
     }
+
 
 }

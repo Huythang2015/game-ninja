@@ -16,8 +16,8 @@ TagManager:
   - UI
   - Player
   - enemy
-  - 
-  - 
+  - slash
+  - kiemtra
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: player
+    uniqueID: 365862327
     locked: 0

@@ -16,7 +16,7 @@ public class chem : StateMachineBehaviour
             player.instance.tocdo = tocdokhichem;
         }
         
-       
+      
 
     }
 
