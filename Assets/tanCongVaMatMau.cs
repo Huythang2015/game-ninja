@@ -30,13 +30,20 @@ public class tanCongVaMatMau : MonoBehaviour
             Collider2D[] KhuVucChem = Physics2D.OverlapCircleAll(diemChem.position, phamViChem, layerKeThu);
             foreach(Collider2D enemy in KhuVucChem) // kiem tra enemy nao trong khu vuc chem 
             {
-
+                if ( enemy.tag == "enemy")
+                {
+                    if ( enemy.GetComponent<satthuong>() != null)
+                    {
+                        enemy.GetComponent<satthuong>().matMau(10);
+                        ngungChem();
+                    }
+                }
             }
         }
     }
-    public void satthuong()
+    public void satthuong(float dam)
     {
-
+        mau -= dam;
         thanhmau.value = mau;
     }
     public void chem()
@@ -51,8 +58,5 @@ public class tanCongVaMatMau : MonoBehaviour
     {
         Gizmos.DrawWireSphere(diemChem.position, phamViChem);
     }
-    public void thunghiem()
-    {
-        Debug.Log("oske");
-    }
+   
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
+
 public class player : MonoBehaviour
 {
    
@@ -20,37 +21,47 @@ public class player : MonoBehaviour
     public Transform anhSangKiem;
     Quaternion xoayKiem;
     bool KTMatDat;
+    public ParticleSystem vetchem;
+
     
-    
-    public void Awake()
+    public ParticleSystem.RotationOverLifetimeModule xoayTronDoi;
+
+
+public void Awake()
     {
         instance = this;
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        xoayTronDoi = vetchem.rotationOverLifetime;  
+        
     }
-
     
 // Update is called once per frame
     private void Update()
     {
-
+        
+        
         // di chuyen , chem, nhay
+        // xoay vat the , vfx cho dung
         if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton("phai"))
         {
             transform.position = transform.position + new Vector3(1, 0, 0) * tocdo * Time.deltaTime;
-
+         
             //anim.enabled = false;
 
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
            
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
-            xoaydau.x = 1;
+            xoaydau.x *= -1;
             if (transform.localScale.x != 1)
                 transform.localScale = xoaydau;
+            if (xoayTronDoi.zMultiplier > 0)
+            {
+                xoayTronDoi.zMultiplier *= -1;
+            }
         }
         else if (Input.GetKey(KeyCode.Z) || CrossPlatformInputManager.GetButton("trai"))
         {
@@ -59,9 +70,13 @@ public class player : MonoBehaviour
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
-            xoaydau.x = -1;
+            xoaydau.x *= -1;
             if (transform.localScale.x == 1)
                 transform.localScale = xoaydau;
+            if ( xoayTronDoi.zMultiplier < 0)
+            {
+                xoayTronDoi.zMultiplier *= -1;
+            }
 
         }
         else
@@ -81,10 +96,9 @@ public class player : MonoBehaviour
             KTMatDat = true;
         }
         
-        Debug.Log(rigi.velocity.y);
-        Debug.Log(anim.GetBool("nhay"));
+       
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision) // check mat dat
     {
         if (collision.gameObject.tag == "KTMatDat")
         {

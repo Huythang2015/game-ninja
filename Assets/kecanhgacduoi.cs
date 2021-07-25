@@ -36,11 +36,10 @@ public class kecanhgacduoi : StateMachineBehaviour
         khoangcach = Vector2.Distance(vitriPlayer, animator.transform.position);
 
         time -= Time.deltaTime;
-       
-        if (time <= 0)
-        {
-            Debug.Log(khoangcach);
-            if (khoangcach <= 3)
+
+
+        Debug.Log(khoangcach);
+        if (khoangcach <= 3)
             {
                 Debug.Log("ok");
                 if (so == 0)
@@ -53,7 +52,9 @@ public class kecanhgacduoi : StateMachineBehaviour
                     animator.SetTrigger("dung");
                 }
             }
-            else
+        else if  (khoangcach > 3) 
+        {
+           if (time <= 0)
             {
                 if (so == 0)
                 {
@@ -65,8 +66,6 @@ public class kecanhgacduoi : StateMachineBehaviour
                     animator.SetTrigger("dung");
                 }
             }
-
-
         }
     }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

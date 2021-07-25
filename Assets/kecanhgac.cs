@@ -13,33 +13,75 @@ public class kecanhgac : MonoBehaviour
     public float PhamviSTChem;
     public LayerMask playerLayer;
     public GameObject Pplayer;
+    public Animator anim;
+    Vector3 viTriBandau;
+    Vector3 huongVe;
+    public ParticleSystem vetChem;
+    public ParticleSystem xien;
+    float khoangcach;
     // Start is called before the first frame update
     void Start()
     {
+        viTriBandau = transform.position;
        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        var TDTronDoi = xien.velocityOverLifetime;
+        var xoayTronDoi = vetChem.rotationOverLifetime;
+        khoangcach = Vector3.Distance(Pplayer.transform.position, viTriBandau);
+        if (khoangcach > 40)
+        {
+            anim.SetTrigger("dive");
+            huongVe = (viTriBandau - transform.position).normalized * tocdo;
+            rigi.velocity = new Vector3(huongVe.x , rigi.velocity.y);
+        }
+        else
+        {
+            anim.SetTrigger("hoatdong");
+        }
+
+
+        // xoay theo Player
         if (player.instance.transform.position.x > transform.position.x)
         {
-            
-            xoayenemy = transform.localScale;
-            xoayenemy.x *= -1;
-            if (transform.localScale.x >0)
+            if (xoayTronDoi.zMultiplier < 0)
             {
-               // Debug.Log("so");
-                transform.localScale = xoayenemy;
+                xoayTronDoi.zMultiplier *= -1;
             }
-           
-        }
-        else if (player.instance.transform.position.x < transform.position.x)
-        {
+
+            if (TDTronDoi.xMultiplier > 0)
+            {
+                TDTronDoi.x = new ParticleSystem.MinMaxCurve(-50);
+            }
+
 
             xoayenemy = transform.localScale;
             xoayenemy.x *= -1;
+            if (transform.localScale.x > 0)
+            {
+                // Debug.Log("so");
+                transform.localScale = xoayenemy;
+            }
+
+        }
+        else if (player.instance.transform.position.x < transform.position.x)
+        {
+            if (xoayTronDoi.zMultiplier > 0)
+            {
+                xoayTronDoi.zMultiplier *= -1;
+            }
+            if (TDTronDoi.xMultiplier < 0)
+            {
+                TDTronDoi.x = new ParticleSystem.MinMaxCurve(50);
+            }
+            
+
+            xoayenemy = transform.localScale;
+            xoayenemy.x *= -1;
+        
             if (transform.localScale.x < 0)
             {
                // Debug.Log("so");

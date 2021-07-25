@@ -21,6 +21,8 @@ public class kecanhgacdung : StateMachineBehaviour
         time = Random.Range(timeMin, timemax);
         so = Random.Range(soMin, soMax);
         tigi = animator.transform. GetComponent<Rigidbody>();
+        animator.ResetTrigger("bidau");
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

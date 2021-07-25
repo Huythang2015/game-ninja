@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class satthuong : MonoBehaviour
+public class canhgacst : MonoBehaviour
 {
     public float mau;
-    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         mau = 100;
     }
 
-    public void matMau(int dam)
+    // Update is called once per frame
+    void Update()
     {
-        mau -= dam;
-
-        anim.SetTrigger("bidau");
-      
+        
     }
 }
