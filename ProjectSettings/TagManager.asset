@@ -9,6 +9,7 @@ TagManager:
   - MatDat
   - enemy
   - KhuVucChiuSatThuong
+  - slide
   layers:
   - Default
   - TransparentFX

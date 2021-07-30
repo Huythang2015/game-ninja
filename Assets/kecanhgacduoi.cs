@@ -23,7 +23,7 @@ public class kecanhgacduoi : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log(khoangcach);
+        //Debug.Log(khoangcach);
         // vi tri Player
         // vi tri enemy
         // khi het thoi gian thi doi Hoat Canh dua tren khoang cach
@@ -38,10 +38,10 @@ public class kecanhgacduoi : StateMachineBehaviour
         time -= Time.deltaTime;
 
 
-        Debug.Log(khoangcach);
+       // Debug.Log(khoangcach);
         if (khoangcach <= 3)
             {
-                Debug.Log("ok");
+                
                 if (so == 0)
                 {
                     animator.SetTrigger("chem");

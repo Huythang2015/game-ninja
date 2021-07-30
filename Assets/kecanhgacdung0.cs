@@ -23,7 +23,7 @@ public class kecanhgacdung0 : StateMachineBehaviour
         if (animator.transform.position.x < player.instance.transform.position.x + 1 && animator.transform.position.x > player.instance.transform.position.x - 1
             )
         {
-            animator.SetTrigger("chem");
+            //animator.SetTrigger("chem");
         }
         
         time -= Time.deltaTime;

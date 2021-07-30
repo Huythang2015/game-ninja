@@ -14,12 +14,12 @@ public class ninjahoichuyen : MonoBehaviour
     bool khoidong = false;
     public BoxCollider boxnin;
     public GameObject chem;
-    
+    float tocdothat;
    
     // Start is called before the first frame update
     void Start()
     {
-        
+        tocdothat = player.instance.tocdo;
     }
     private void Update()
     {
@@ -57,9 +57,10 @@ public class ninjahoichuyen : MonoBehaviour
             {
                 chuHien.text = ""; // chữ sẽ không còn
                 khoidong = false;
-                
+                player.instance.tocdo = 0;
                 ninjahoichuyen.Destroy(gameObject, 10); // xóa gameobj sau 10 giây
                 chem.SetActive(true);
+                player.instance.tocdo = tocdothat;
             }
         }
        
@@ -73,7 +74,7 @@ public class ninjahoichuyen : MonoBehaviour
             Debug.Log("an");
             chuHien.text = "";
             StartCoroutine(layChu());
-           
+            player.instance.tocdo = 0;
 
             khoidong = true;
             boxnin.enabled = false;

@@ -19,21 +19,24 @@ public class kecanhgac : MonoBehaviour
     public ParticleSystem vetChem;
     public ParticleSystem xien;
     float khoangcach;
+    public static kecanhgac instance;
     // Start is called before the first frame update
     void Start()
     {
         viTriBandau = transform.position;
-       
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         var TDTronDoi = xien.velocityOverLifetime;
         var xoayTronDoi = vetChem.rotationOverLifetime;
-        khoangcach = Vector3.Distance(Pplayer.transform.position, viTriBandau);
+        khoangcach = Vector3.Distance(player.instance.transform.position, viTriBandau);
         if (khoangcach > 40)
         {
+           
             anim.SetTrigger("dive");
             huongVe = (viTriBandau - transform.position).normalized * tocdo;
             rigi.velocity = new Vector3(huongVe.x , rigi.velocity.y);
@@ -45,7 +48,7 @@ public class kecanhgac : MonoBehaviour
 
 
         // xoay theo Player
-        if (player.instance.transform.position.x > transform.position.x)
+        if (player.instance.transform.position.x > transform.position.x + 1)
         {
             if (xoayTronDoi.zMultiplier < 0)
             {
@@ -67,7 +70,7 @@ public class kecanhgac : MonoBehaviour
             }
 
         }
-        else if (player.instance.transform.position.x < transform.position.x)
+        else if (player.instance.transform.position.x < transform.position.x - 1)
         {
             if (xoayTronDoi.zMultiplier > 0)
             {
@@ -99,8 +102,9 @@ public class kecanhgac : MonoBehaviour
                 Debug.Log(Player.name);
                 if (Player.tag == "KhuVucChiuSatThuong")
                 {
-                    
-                    Pplayer.transform.parent.GetComponent<tanCongVaMatMau>().satthuong(10);
+
+                    //player.instance.transform.GetComponent<tanCongVaMatMau>().satthuong(10);
+                    player.instance.GetComponent<tanCongVaMatMau>().satthuong(10);
                     stChem = false;
                 }
             }
@@ -122,4 +126,5 @@ public class kecanhgac : MonoBehaviour
     {
         Gizmos.DrawWireSphere(ViTriSTChem .position, PhamviSTChem);
     }
+   
 }

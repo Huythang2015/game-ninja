@@ -6,8 +6,9 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class player : MonoBehaviour
 {
-   
-    
+
+    public float TGCho;
+    public float tocdoTB;
     bool nhay = false;
     public float lucnhay;
     public float tocdo;
@@ -34,7 +35,7 @@ public void Awake()
     // Start is called before the first frame update
     void Start()
     {
-        xoayTronDoi = vetchem.rotationOverLifetime;  
+        xoayTronDoi = vetchem.rotationOverLifetime;
         
     }
     
@@ -42,6 +43,28 @@ public void Awake()
     private void Update()
     {
         
+        if (TGCho > 0)
+        {
+            TGCho -= Time.deltaTime;
+        }
+        // toc bien
+        else if (TGCho <= 0)
+        {
+            if (Input.GetKeyUp(KeyCode.V))
+            {
+                if (transform.localScale.x < 0)
+                {
+                    TocBien(1);
+                    TGCho = 3;
+                }
+                if (transform.localScale.x > 0)
+                {
+                    TocBien(-1);
+                    TGCho = 3;
+                }
+            }
+        }
+       
         
         // di chuyen , chem, nhay
         // xoay vat the , vfx cho dung
@@ -78,6 +101,7 @@ public void Awake()
                 xoayTronDoi.zMultiplier *= -1;
             }
 
+
         }
         else
         {
@@ -105,6 +129,10 @@ public void Awake()
             KTMatDat = false;
             anim.SetBool("nhay", false);
         }
+    }
+    public void TocBien(int x)
+    {
+        player.instance.transform.position += new Vector3(x, 0, 0) * tocdoTB * Time.deltaTime;
     }
 
 
