@@ -12,12 +12,14 @@ public class kecanhgacduoi : StateMachineBehaviour
     public int so;
     Vector2 vitriPlayer;
     float khoangcach;
+    public float tocdo;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         time = Random.Range(timeMin, timemax);
         so = Random.Range(soMin, soMax);
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,9 +29,10 @@ public class kecanhgacduoi : StateMachineBehaviour
         // vi tri Player
         // vi tri enemy
         // khi het thoi gian thi doi Hoat Canh dua tren khoang cach
-        Vector2 diemden = new Vector2(player.instance.transform. position.x, animator.transform. position.y);
+        Vector3 diemden = new Vector3(player.instance.transform. position.x, animator.transform. position.y, animator.transform.position.z);
 
-        animator.transform. position = Vector2.MoveTowards(animator.transform. position, diemden, 3 * Time.deltaTime);
+        //animator.transform. position = Vector2.MoveTowards(animator.transform. position, diemden, 3 * Time.deltaTime);
+        //animator.GetComponent<Rigidbody>().velocity = new Vector3(diemden.x * tocdo * Time.deltaTime , animator.GetComponent<Rigidbody>().velocity.y);
 
         vitriPlayer = player.instance.transform.position;
 

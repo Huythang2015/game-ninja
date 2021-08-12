@@ -16,6 +16,7 @@ public class kecanhgac : MonoBehaviour
     public Animator anim;
     Vector3 viTriBandau;
     Vector3 huongVe;
+    float khoangcachVoiViTriBanDau;
     public ParticleSystem vetChem;
     public ParticleSystem xien;
     float khoangcach;
@@ -30,69 +31,123 @@ public class kecanhgac : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(khoangcachVoiViTriBanDau);
         var TDTronDoi = xien.velocityOverLifetime;
         var xoayTronDoi = vetChem.rotationOverLifetime;
         khoangcach = Vector3.Distance(player.instance.transform.position, viTriBandau);
-        if (khoangcach > 40)
+        khoangcachVoiViTriBanDau = Vector3.Distance(transform.position, viTriBandau);
+        if (khoangcach > 40) // di ve
         {
            
             anim.SetTrigger("dive");
             huongVe = (viTriBandau - transform.position).normalized * tocdo;
-            rigi.velocity = new Vector3(huongVe.x , rigi.velocity.y);
+           // rigi.velocity = new Vector3(huongVe.x , rigi.velocity.y);
+            if (player.instance.transform.position.x < viTriBandau.x )
+            {
+                if (xoayTronDoi.zMultiplier < 0)
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+
+                if (TDTronDoi.xMultiplier > 0)
+                {
+                    TDTronDoi.x = new ParticleSystem.MinMaxCurve(-50);
+                }
+
+
+                xoayenemy = transform.localScale;
+                xoayenemy.x *= -1;
+                if (transform.localScale.x > 0)
+                {
+                    // Debug.Log("so");
+                    transform.localScale = xoayenemy;
+                }
+                
+            }
+            else if (player.instance.transform.position.x > viTriBandau.x )
+            {
+                if (xoayTronDoi.zMultiplier > 0)
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+                if (TDTronDoi.xMultiplier < 0)
+                {
+                    TDTronDoi.x = new ParticleSystem.MinMaxCurve(50);
+                }
+
+
+                xoayenemy = transform.localScale;
+                xoayenemy.x *= -1;
+
+                if (transform.localScale.x < 0)
+                {
+                    // Debug.Log("so");
+                    transform.localScale = xoayenemy;
+                }
+
+            }
+            if (khoangcachVoiViTriBanDau > -1 &&  khoangcachVoiViTriBanDau < 1)
+            {
+                anim.enabled = false;
+            }
         }
         else
         {
+            if (anim.enabled == false)
+            {
+                anim.enabled = true;
+            }
+            
+            if (player.instance.transform.position.x > transform.position.x + 1)
+            {
+                if (xoayTronDoi.zMultiplier < 0)
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+
+                if (TDTronDoi.xMultiplier > 0)
+                {
+                    TDTronDoi.x = new ParticleSystem.MinMaxCurve(-50);
+                }
+
+
+                xoayenemy = transform.localScale;
+                xoayenemy.x *= -1;
+                if (transform.localScale.x > 0)
+                {
+                    // Debug.Log("so");
+                    transform.localScale = xoayenemy;
+                }
+
+            }
+            else if (player.instance.transform.position.x < transform.position.x - 1)
+            {
+                if (xoayTronDoi.zMultiplier > 0)
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+                if (TDTronDoi.xMultiplier < 0)
+                {
+                    TDTronDoi.x = new ParticleSystem.MinMaxCurve(50);
+                }
+
+
+                xoayenemy = transform.localScale;
+                xoayenemy.x *= -1;
+
+                if (transform.localScale.x < 0)
+                {
+                    // Debug.Log("so");
+                    transform.localScale = xoayenemy;
+                }
+
+            }
             anim.SetTrigger("hoatdong");
         }
 
 
         // xoay theo Player
-        if (player.instance.transform.position.x > transform.position.x + 1)
-        {
-            if (xoayTronDoi.zMultiplier < 0)
-            {
-                xoayTronDoi.zMultiplier *= -1;
-            }
-
-            if (TDTronDoi.xMultiplier > 0)
-            {
-                TDTronDoi.x = new ParticleSystem.MinMaxCurve(-50);
-            }
-
-
-            xoayenemy = transform.localScale;
-            xoayenemy.x *= -1;
-            if (transform.localScale.x > 0)
-            {
-                // Debug.Log("so");
-                transform.localScale = xoayenemy;
-            }
-
-        }
-        else if (player.instance.transform.position.x < transform.position.x - 1)
-        {
-            if (xoayTronDoi.zMultiplier > 0)
-            {
-                xoayTronDoi.zMultiplier *= -1;
-            }
-            if (TDTronDoi.xMultiplier < 0)
-            {
-                TDTronDoi.x = new ParticleSystem.MinMaxCurve(50);
-            }
-            
-
-            xoayenemy = transform.localScale;
-            xoayenemy.x *= -1;
-        
-            if (transform.localScale.x < 0)
-            {
-               // Debug.Log("so");
-                transform.localScale = xoayenemy;
-            }
-
-        }
-
+       
        
         if ( stChem == true)
         {
