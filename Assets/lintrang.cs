@@ -58,10 +58,15 @@ public class lintrang : MonoBehaviour
     public void Reset()
     {
         mau = 200;
+        gameObject.SetActive(false);
     }
     public void matMau(int dam)
     {
         mau -= dam;
+        if (mau <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnDrawGizmosSelected()
     {
