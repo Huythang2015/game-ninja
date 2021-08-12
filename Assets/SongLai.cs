@@ -34,8 +34,11 @@ public class SongLai : MonoBehaviour
         cam.Follow = Player.transform.GetChild(0).GetChild(0) ;
         satthuong.instance.Reset();
         conglon.instance.Reset();
-
-        satthuongtac.instance.Reset();
+        if (satthuong.instance.gameObject != null)
+        {
+            satthuongtac.instance.Reset();
+        }
+        
         
     }
 }

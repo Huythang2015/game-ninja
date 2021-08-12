@@ -1,7 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
+
 
 
 public class player : MonoBehaviour
@@ -20,47 +23,93 @@ public class player : MonoBehaviour
     Vector3 xoaydau;
     Vector3 xoaydau2;
     public Transform anhSangKiem;
+    public Transform anhsangXia;
     Quaternion xoayKiem;
     bool KTMatDat;
     public ParticleSystem vetchem;
-
-    
+    public ParticleSystem vetchem2;
+    float tgdanh;
+    public ParticleSystem.RotationOverLifetimeModule xoayTronDoi2;
     public ParticleSystem.RotationOverLifetimeModule xoayTronDoi;
-
+    public  Slider thanhTocBien;
+    public float tocdobandau;
+    float y;
+   
 
 public void Awake()
     {
         instance = this;
+        thanhTocBien = GameObject.FindWithTag("UI").transform.Find("khichoi"). Find("thanhTocBien").GetComponent<Slider>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        xoayTronDoi = vetchem.rotationOverLifetime;
-        
+        // gán giá trị vào biến 
+        tocdobandau = tocdo;
+        xoayTronDoi = vetchem.rotationOverLifetime; 
+        xoayTronDoi2 = vetchem2.rotationOverLifetime;
+        thanhTocBien.maxValue = 3;
     }
     
 // Update is called once per frame
     private void Update()
     {
         
-        if (TGCho > 0)
+        y = transform.localEulerAngles.y;
+        Debug.Log(y);
+        if (y == 0)
         {
+            if (rigi.constraints != RigidbodyConstraints.FreezePositionZ)
+            {
+                rigi.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+
+            }
+        }
+        else if (y != 0)
+        {
+            if (rigi.constraints != RigidbodyConstraints.FreezePositionX )
+            {
+                rigi.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+               
+                
+            }
+        }
+         
+        if (TGCho > 0) // thoi gian cho de toc bien
+        {
+            thanhTocBien.value = TGCho;
             TGCho -= Time.deltaTime;
         }
         // toc bien
         else if (TGCho <= 0)
         {
-            if (Input.GetKeyUp(KeyCode.V))
+            
+            if (Input.GetKeyUp(KeyCode.V) || CrossPlatformInputManager.GetButtonUp ("tocbien")) // bam v de toc bien
             {
-                if (transform.localScale.x < 0)
+                if (tocdo > 0)                   
                 {
-                    TocBien(1);
-                    TGCho = 3;
-                }
-                if (transform.localScale.x > 0)
-                {
-                    TocBien(-1);
-                    TGCho = 3;
+                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName ("man1"))
+                    {
+                        if (transform.localScale.x < 0)
+                        {
+                            thanhTocBien.value = TGCho;
+                            TocBien(-1);
+                            TGCho = 3;
+                        }
+                        if (transform.localScale.x > 0)
+                        {
+                            thanhTocBien.value = TGCho;
+                            TocBien(1);
+                            TGCho = 3;
+                        }
+                    } 
+                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("man2"))
+                    {
+                        anim.Play("tocbien");
+                        TGCho = 3;
+                    }
+
+
                 }
             }
         }
@@ -68,14 +117,25 @@ public void Awake()
         
         // di chuyen , chem, nhay
         // xoay vat the , vfx cho dung
-        if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton("phai"))
+        if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton("phai")) // xoay sang phai
         {
-            transform.position = transform.position + new Vector3(1, 0, 0) * tocdo * Time.deltaTime;
-         
+            if (y == 0 
+                ||  SceneManager.GetSceneByName("man1") == SceneManager.GetActiveScene())
+            {
+               
+                transform.position = transform.position + new Vector3(1, 0, 0) * tocdo * Time.deltaTime;
+                Debug.Log(SceneManager.GetActiveScene().name);
+            }
+            else if (y != 0)
+            {
+
+                transform.position = transform.position + new Vector3(0, 0, 1) * tocdo * Time.deltaTime;
+            }
+
             //anim.enabled = false;
 
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
-           
+            anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
             xoaydau.x *= -1;
@@ -85,34 +145,68 @@ public void Awake()
             {
                 xoayTronDoi.zMultiplier *= -1;
             }
+            if (xoayTronDoi2.zMultiplier < 0)
+            {
+                xoayTronDoi2.zMultiplier *= -1;
+            }
         }
-        else if (Input.GetKey(KeyCode.Z) || CrossPlatformInputManager.GetButton("trai"))
+        else if (Input.GetKey(KeyCode.Z) || CrossPlatformInputManager.GetButton("trai")) //bam nut z de sang trai dong thoi quay sang trai
         {
-            transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
+            if (y == 0
+                 || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("man1"))
+            {               
+                transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
+               
 
+            }
+            else if (y != 0)
+            {
+                
+                   
+
+                transform.position = transform.position + new Vector3(0, 0, -1) * tocdo * Time.deltaTime;
+            }
+               
+            anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
             anim.SetBool("chay", true);
             xoaydau = transform.localScale;
             xoaydau.x *= -1;
             if (transform.localScale.x == 1)
                 transform.localScale = xoaydau;
-            if ( xoayTronDoi.zMultiplier < 0)
+            if ( xoayTronDoi.zMultiplier < 0) // xoay vfx
             {
                 xoayTronDoi.zMultiplier *= -1;
             }
-
+            if (xoayTronDoi2.zMultiplier > 0) // xoay vfx
+            {
+                xoayTronDoi2.zMultiplier *= -1;
+            }
 
         }
         else
         {
             anim.SetBool("chay", false);
         }
-
-        if (Input.GetKeyDown (KeyCode.X) || CrossPlatformInputManager.GetButtonUp("danh"))
+        if (tgdanh > 0) // tg de danh
         {
-            anim.SetTrigger("chem");
+            tgdanh -= Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButtonUp("len") && KTMatDat == false)
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.X) || CrossPlatformInputManager.GetButtonUp("danh"))
+            {
+
+                if (tgdanh <= 0)
+                {
+                    anim.SetBool("chem",true);
+                    tgdanh = 0.5f;
+                }
+
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButtonUp("len") && KTMatDat == false)// nut nhay
         {
             
             anim.SetBool ("nhay",true);

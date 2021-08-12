@@ -8,7 +8,7 @@ namespace UnityStandardAssets.Utility
     {
         // An incredibly simple menu which, when given references
         // to gameobjects in the scene
-        //spublic GUIText camSwitchButton;
+        //public GUIText camSwitchButton;
         public GameObject[] objects;
 
 

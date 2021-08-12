@@ -10,6 +10,8 @@ TagManager:
   - enemy
   - KhuVucChiuSatThuong
   - slide
+  - UI
+  - kecanhgac
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class tanCongVaMatMau : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class tanCongVaMatMau : MonoBehaviour
     public float phamViChem;
     public LayerMask layerKeThu;
     public static tanCongVaMatMau instance;
-
+    public Scene lever1;
+    
     private void Awake()
     {
         instance = this;
@@ -22,6 +24,9 @@ public class tanCongVaMatMau : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lever1 = SceneManager.GetSceneByBuildIndex (1); // cho lever1 = man 1
+        
+       
         mau = maxMau;
         thanhmau = GameObject.Find("thanhmauPlayer").GetComponent<Slider>();
         
@@ -48,8 +53,27 @@ public class tanCongVaMatMau : MonoBehaviour
                         ngungChem();
                     }
                     
+                    
                 }
                 
+            }
+            Collider[] khuvucchem = Physics.OverlapSphere(diemChem.position, phamViChem, layerKeThu);
+            foreach (Collider enemy in khuvucchem)  // kiem tra eney nao trong khu vuc chem
+            {
+                if (enemy.tag == "enemy")
+                {
+                    if (enemy.GetComponent<kiemsi>() != null)
+                    {
+                        enemy.GetComponent<kiemsi>().matMau(10);
+                        ngungChem();
+                        
+                    }
+                    if (enemy.GetComponent<lintrang>() != null)
+                    {
+                        enemy.GetComponent<lintrang>().matMau(10);
+                    }
+
+                }
             }
         }
         if (choChem == true)
@@ -77,10 +101,19 @@ public class tanCongVaMatMau : MonoBehaviour
         thanhmau.value = mau;
         if (mau <= 0) // su ly hoi sinh
         {
-            Destroy(gameObject.transform.parent.gameObject);
-            SongLai.instance.HoiSinh();
-            
-            
+            if (SceneManager.GetActiveScene() == lever1) // neu o man1 thi xoa player
+            {
+                Destroy(gameObject.transform.parent.gameObject);
+                SongLai.instance.HoiSinh();
+
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
+            {
+                songlaiman2.instance.hoisinh();
+                
+            }
+
+
         }
     }
     public void chem()
@@ -91,7 +124,7 @@ public class tanCongVaMatMau : MonoBehaviour
     {
         choChem = false;
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() // hen thi khu vuc chem truc quan
     {
         Gizmos.DrawWireSphere(diemChem.position, phamViChem);
     }
