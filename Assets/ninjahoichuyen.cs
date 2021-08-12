@@ -65,7 +65,7 @@ public class ninjahoichuyen : MonoBehaviour
         }
        
     }
-
+    // nếu Player va chạm vs thằng này thì:z
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "KhuVucChiuSatThuong")

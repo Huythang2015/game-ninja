@@ -19,6 +19,7 @@ public class nutacdung : StateMachineBehaviour
     {
         time = Random.Range(timeMin, timemax);
         so = Random.Range(soMin, soMax);
+        animator.ResetTrigger("bidau");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

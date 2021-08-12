@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class chem : StateMachineBehaviour
 {
@@ -15,16 +16,28 @@ public class chem : StateMachineBehaviour
             
             player.instance.tocdo = tocdokhichem;
         }
-        
-      
+
+        animator.SetBool("chem1", false);
+        animator.SetBool("chem", false);
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+       if (Input.GetKeyDown(KeyCode.X) || CrossPlatformInputManager.GetButtonUp("danh"))
+        {
+            animator.SetBool("chem1", true);
+            animator.SetBool("chay", false);
+        }
+       
+       if (Input.GetKey(KeyCode.C) || Input.GetKey(KeyCode.Z))
+        {
+            animator.SetBool("chem1", false);
+            
+        }
+      
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

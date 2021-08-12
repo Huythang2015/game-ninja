@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class nutacnoi : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class nutacnoi : MonoBehaviour
     public GameObject chem;
     float tocdothat;
     public Animator nutac;
-  
+    public Slider thanhmau;
     public Transform caicong;
 
     // Start is called before the first frame update
@@ -66,6 +67,8 @@ public class nutacnoi : MonoBehaviour
                 player.instance.tocdo = tocdothat;
                 nutac.enabled = true;
                 transform.parent.Find("khoidong").gameObject.active = true;
+                satthuongtac.instance.thanhhp.SetActive(true);
+               
             }
         }
 
