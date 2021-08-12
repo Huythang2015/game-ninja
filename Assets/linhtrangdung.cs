@@ -42,35 +42,39 @@ public class linhtrangdung : StateMachineBehaviour
 
 
         // Debug.Log(khoangcach);
-        if (khoangcach <= 3)
+        if (time <= 0)
         {
+            if (khoangcach <= 3)
+            {
 
-            if (so == 0)
-            {
-                animator.SetTrigger("danh");
-
-            }
-            else if (so == 1)
-            {
-                animator.SetTrigger("danh");
-            }
-        }
-        else if (khoangcach > 3)
-        {
-            if (time <= 0)
-            {
                 if (so == 0)
                 {
-                    animator.SetTrigger("duoi");
+                    animator.SetTrigger("danh");
 
                 }
                 else if (so == 1)
                 {
-                    animator.SetTrigger("duoi");
+                    animator.SetTrigger("danh");
+                }
+            }
+            else if (khoangcach > 3)
+            {
+                if (time <= 0)
+                {
+                    if (so == 0)
+                    {
+                        animator.SetTrigger("duoi");
+
+                    }
+                    else if (so == 1)
+                    {
+                        animator.SetTrigger("duoi");
+                    }
                 }
             }
         }
     }
+        
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
