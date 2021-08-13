@@ -209,14 +209,14 @@ public void Awake()
         if (Input.GetKey(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButtonUp("len") && KTMatDat == false)// nut nhay
         {
             
-            anim.SetBool ("nhay",true);
-            rigi.AddForce(new Vector2 (0, 2f ) * lucnhay, ForceMode.Force);
-            KTMatDat = true;
+            anim.SetBool ("nhay",true); // chạy anim nhảy
+            rigi.AddForce(new Vector2 (0, 2f ) * lucnhay, ForceMode.Force); // thêm lực cho nó nhảy
+            KTMatDat = true; 
         }
         
        
     }
-    private void OnCollisionStay(Collision collision) // check mat dat
+    private void OnCollisionStay(Collision collision) // check mat dat . chạm mặt đất mới cho nhảy
     {
         if (collision.gameObject.tag == "KTMatDat")
         {
@@ -224,10 +224,15 @@ public void Awake()
             anim.SetBool("nhay", false);
         }
     }
-    public void TocBien(int x)
+    public void TocBien(int x) // gọi hàm này thì Player tốc biến
     {
         player.instance.transform.position += new Vector3(x, 0, 0) * tocdoTB * Time.deltaTime;
     }
-
+    public void savegame() //hàm này là để savegame
+    {
+        PlayerPrefs.SetInt("manchoi", SceneManager.GetActiveScene().buildIndex);
+        Debug.Log(PlayerPrefs.GetInt("manchoi"));
+    }
+    
 
 }
