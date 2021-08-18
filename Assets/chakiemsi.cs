@@ -26,43 +26,29 @@ public class chakiemsi : MonoBehaviour
         khoangcachvitriBD = Vector3.Distance(kiemsi. transform.position, vitriBD);
         if (khoangcach <= 50) // khi khoảng cách vs player mà nhỏ hơn hoặc = 50 thì
         {
-            if (kiemsi.gameObject.active == false && linhtrang != null)
+            if (kiemsi.gameObject.active == false)
             {
-                kiemsi.gameObject.SetActive(true);
+                kiemsi.gameObject. SetActive(true);
+                kiemsi.transform.position = vitriBD;
             }
-           if (linhtrang.active == false && linhtrang != null)
+            if (linhtrang != null)
             {
-                linhtrang.SetActive(true);
-            }
-            
-                
-            
-           
-           
-            
-        }
-       /* else // khoảng cách vs player lớn hơn 50 thi
-        {
-            if (khoangcachvitriBD >= 3)
-            {
-                kiemsi.GetComponent<Animator>().Play("dive", 0);
-               
-            }
-           
-            
-            if (khoangcachvitriBD < 3) 
-            {
-               if (kiemsi.gameObject.active = true)
+                if (linhtrang.active == false)
                 {
-                    kiemsi.gameObject.SetActive(false);
+                    linhtrang.transform.position = vitriBD;
+                    linhtrang.SetActive(true);
                 }
-                
-               
 
             }
-          
-            
-        }*/
+
+            //khi nào player chết đi thì thằng kiếm sĩ nếu còn sống sẽ đầy máu đồng thời bị tắt về vị trí ban đầu
+            //khi nào player lại gần thì nó được bật và đánh nhau vs Player;
+
+
+
+
+        }
+       
             
         
     }

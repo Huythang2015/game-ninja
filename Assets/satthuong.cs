@@ -15,7 +15,7 @@ public class satthuong : MonoBehaviour
     void Start()
     {
         instance = this;
-        mau = 100;
+        mau = 20;
     }
 
     public void matMau(int dam)
@@ -39,6 +39,6 @@ public class satthuong : MonoBehaviour
     }
     public void Reset()
     {
-        mau = 100;
+        mau = 20;
     }
 }

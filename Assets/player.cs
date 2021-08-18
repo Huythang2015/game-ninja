@@ -212,9 +212,10 @@ public class player : MonoBehaviour
   
         Debug.Log(PlayerPrefs.GetInt("manchoi"));
     }
-    public void Reset()
+    public void Reset() // resret mau
     {
         tancongmatmau.mau = tancongmatmau.maxMau;
+        tancongmatmau.thanhmau.value = tancongmatmau.mau;
     }
     private void FixedUpdate()
     {

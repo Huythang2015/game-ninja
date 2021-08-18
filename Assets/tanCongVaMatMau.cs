@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class tanCongVaMatMau : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class tanCongVaMatMau : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lever1 = SceneManager.GetSceneByBuildIndex (1); // cho lever1 = man 1
+        lever1 = SceneManager.GetSceneByName("man1"); // cho lever1 = man 1
         
        
         mau = maxMau;
@@ -135,12 +136,14 @@ public class tanCongVaMatMau : MonoBehaviour
     {
         if (other.tag == "diemLuu")
         {
-            if (Input.GetKeyDown(KeyCode.B))
+            if (CrossPlatformInputManager.GetButton("danh"))
             {
-                Debug.Log(other.name);
-                viTriLuu = other.transform;
-            }
-           
+                if (other.transform != viTriLuu)
+                {
+                    Debug.Log(other.name);
+                    viTriLuu = other.transform;
+                }
+            }           
         }
     }
 

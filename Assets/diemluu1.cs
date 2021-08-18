@@ -10,13 +10,8 @@ public class diemluu1 : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "KhuVucChiuSatThuong")
-        {
-            if (Input.GetKeyDown(KeyCode.X) || CrossPlatformInputManager.GetButtonUp("danh"))
-            {
-                SongLai.instance.vitriSongLai = transform;
-            }
-
-            luu.text = "bấm chém để lưu";
+        {           
+            luu.text = "điểm lưu";
         }
         
 
