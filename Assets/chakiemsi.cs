@@ -15,7 +15,7 @@ public class chakiemsi : MonoBehaviour
     {
         kiemsi = transform.GetChild(0);
         vitriBD = kiemsi.transform.position;
-        Debug.Log(kiemsi.name);
+        
     }
 
     // Update is called once per frame
@@ -26,11 +26,11 @@ public class chakiemsi : MonoBehaviour
         khoangcachvitriBD = Vector3.Distance(kiemsi. transform.position, vitriBD);
         if (khoangcach <= 50) // khi khoảng cách vs player mà nhỏ hơn hoặc = 50 thì
         {
-            if (kiemsi.gameObject.active == false)
+            if (kiemsi.gameObject.active == false && linhtrang != null)
             {
                 kiemsi.gameObject.SetActive(true);
             }
-           if (linhtrang.active == false)
+           if (linhtrang.active == false && linhtrang != null)
             {
                 linhtrang.SetActive(true);
             }

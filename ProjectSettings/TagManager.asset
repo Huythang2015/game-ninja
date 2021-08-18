@@ -12,6 +12,7 @@ TagManager:
   - slide
   - UI
   - kecanhgac
+  - diemLuu
   layers:
   - Default
   - TransparentFX

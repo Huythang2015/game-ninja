@@ -21,6 +21,7 @@ public class kecanhgac : MonoBehaviour
     public ParticleSystem xien;
     float khoangcach;
     public static kecanhgac instance;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class kecanhgac : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(khoangcachVoiViTriBanDau);
+        
         var TDTronDoi = xien.velocityOverLifetime;
         var xoayTronDoi = vetChem.rotationOverLifetime;
         khoangcach = Vector3.Distance(player.instance.transform.position, viTriBandau);
@@ -149,15 +150,15 @@ public class kecanhgac : MonoBehaviour
         // xoay theo Player
        
        
-        if ( stChem == true)
+        if ( stChem == true) // su ly sat thuong
         {
             Collider[] khuVucChem = Physics.OverlapSphere (ViTriSTChem.position, PhamviSTChem, playerLayer);
             foreach (Collider Player in khuVucChem)
             {
-                Debug.Log(Player.name);
+                
                 if (Player.tag == "KhuVucChiuSatThuong")
                 {
-
+                    Debug.Log(Player.name);
                     //player.instance.transform.GetComponent<tanCongVaMatMau>().satthuong(10);
                     player.instance.GetComponent<tanCongVaMatMau>().satthuong(10);
                     stChem = false;

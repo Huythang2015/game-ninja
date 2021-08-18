@@ -9,9 +9,10 @@ public class SongLai : MonoBehaviour
     public Transform vitriSongLai;
     public GameObject Playerprefap;
     public CinemachineVirtualCamera cam;
-  
-    
- 
+
+     
+
+
     private void Awake()
     {
         instance = this;
@@ -28,10 +29,10 @@ public class SongLai : MonoBehaviour
     {
         
     }
-    public void HoiSinh(  )
+    public void HoiSinh(Vector3 vitriLuu)
     {
-       GameObject Player = Instantiate(Playerprefap, vitriSongLai.position, Quaternion.identity);
-        cam.Follow = Player.transform.GetChild(0).GetChild(0) ;
+        player.instance.transform.position = vitriLuu;
+     
         satthuong.instance.Reset();
         conglon.instance.Reset();
         if (satthuong.instance.gameObject != null)

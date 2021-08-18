@@ -39,10 +39,15 @@ public class nutacda : StateMachineBehaviour
                 animator.SetTrigger("dung");
 
             }
-            else
+            else if (so == 1)
             {
                 animator.SetTrigger("duoi");
             }
+            else
+            {
+                animator.SetTrigger("ban2");
+            }
+
         }
             
         
@@ -54,7 +59,7 @@ public class nutacda : StateMachineBehaviour
 
                 if (so == 0)
                 {
-                    animator.SetTrigger("chem");
+                    animator.SetTrigger("ban2");
 
                 }
                 else if (so == 1)

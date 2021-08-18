@@ -16,15 +16,21 @@ public class songlaiman2 : MonoBehaviour
         PLayer = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
     public void hoisinh()
     {
         PLayer.transform.position = noiHoiSinh.position;
-        kiemsi.instance.Reset();
+        if (player.instance != null)
+        {
+            player.instance.Reset();
+        }
+        
+        if(kiemsi.instance != null)
+        {
+            kiemsi.instance.Reset();
+        }
+
+       
         linh.Reset();
 
     }

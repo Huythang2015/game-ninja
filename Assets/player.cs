@@ -18,10 +18,10 @@ public class player : MonoBehaviour
     public Rigidbody rigi;
     public Transform tranf;
     public static player instance;
-    public BoxCollider2D ktnhay;
+   
     public Animator anim;
     Vector3 xoaydau;
-    Vector3 xoaydau2;
+   
     public Transform anhSangKiem;
     public Transform anhsangXia;
     Quaternion xoayKiem;
@@ -34,12 +34,18 @@ public class player : MonoBehaviour
     public  Slider thanhTocBien;
     public float tocdobandau;
     float y;
-   
-
-public void Awake()
+    public tanCongVaMatMau tancongmatmau;
+    float tg;
+    public VariableJoystick variableJoystick;
+    bool phai = false;
+    bool trai = false;
+    float x;
+    Vector3 sangtrai;
+    Vector3 sangphai;
+    public void Awake()
     {
         instance = this;
-        thanhTocBien = GameObject.FindWithTag("UI").transform.Find("khichoi"). Find("thanhTocBien").GetComponent<Slider>();
+        thanhTocBien = GameObject.FindWithTag("UI").transform.Find("thanh"). Find("thanhTocBien").GetComponent<Slider>();
     }
     // Start is called before the first frame update
     void Start()
@@ -49,31 +55,23 @@ public void Awake()
         xoayTronDoi = vetchem.rotationOverLifetime; 
         xoayTronDoi2 = vetchem2.rotationOverLifetime;
         thanhTocBien.maxValue = 3;
+        
+        
+
     }
     
 // Update is called once per frame
     private void Update()
     {
+         x = variableJoystick.Horizontal;
+        if (y != transform.localEulerAngles.y)
+        {
+            y = transform.localEulerAngles.y;
+        }
+     
         
-        y = transform.localEulerAngles.y;
-        Debug.Log(y);
-        if (y == 0)
-        {
-            if (rigi.constraints != RigidbodyConstraints.FreezePositionZ)
-            {
-                rigi.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-
-            }
-        }
-        else if (y != 0)
-        {
-            if (rigi.constraints != RigidbodyConstraints.FreezePositionX )
-            {
-                rigi.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
-               
-                
-            }
-        }
+       
+       
          
         if (TGCho > 0) // thoi gian cho de toc bien
         {
@@ -88,26 +86,12 @@ public void Awake()
             {
                 if (tocdo > 0)                   
                 {
-                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName ("man1"))
-                    {
-                        if (transform.localScale.x < 0)
-                        {
-                            thanhTocBien.value = TGCho;
-                            TocBien(-1);
-                            TGCho = 3;
-                        }
-                        if (transform.localScale.x > 0)
-                        {
-                            thanhTocBien.value = TGCho;
-                            TocBien(1);
-                            TGCho = 3;
-                        }
-                    } 
-                    if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("man2"))
-                    {
+                   
                         anim.Play("tocbien");
                         TGCho = 3;
-                    }
+                        //rigi.AddForce(new Vector3(tocdoTB, 0, 0) * Time.deltaTime,ForceMode.Impulse);
+                      
+                   
 
 
                 }
@@ -117,22 +101,15 @@ public void Awake()
         
         // di chuyen , chem, nhay
         // xoay vat the , vfx cho dung
-        if (Input.GetKey(KeyCode.C) || CrossPlatformInputManager.GetButton("phai")) // xoay sang phai
+        if (Input.GetKey(KeyCode.C) || x > 0) // xoay sang phai
         {
-            if (y == 0 
-                ||  SceneManager.GetSceneByName("man1") == SceneManager.GetActiveScene())
-            {
-               
-                transform.position = transform.position + new Vector3(1, 0, 0) * tocdo * Time.deltaTime;
-                Debug.Log(SceneManager.GetActiveScene().name);
-            }
-            else if (y != 0)
-            {
 
-                transform.position = transform.position + new Vector3(0, 0, 1) * tocdo * Time.deltaTime;
-            }
 
-            //anim.enabled = false;
+            transform.position = transform.position + new Vector3(1, 0, 0).normalized * tocdo * Time.deltaTime;
+
+            //phai = true;
+            //sangphai = new Vector3(x, 0, 0);
+            
 
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
             anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
@@ -150,23 +127,15 @@ public void Awake()
                 xoayTronDoi2.zMultiplier *= -1;
             }
         }
-        else if (Input.GetKey(KeyCode.Z) || CrossPlatformInputManager.GetButton("trai")) //bam nut z de sang trai dong thoi quay sang trai
+        else if (Input.GetKey(KeyCode.Z) || x < 0) //bam nut z de sang trai dong thoi quay sang trai
         {
-            if (y == 0
-                 || SceneManager.GetActiveScene() == SceneManager.GetSceneByName("man1"))
-            {               
-                transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
-               
+                       
+            transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
 
-            }
-            else if (y != 0)
-            {
-                
-                   
+            //trai = true;
+            //sangtrai = new Vector3(x, 0, 0);
 
-                transform.position = transform.position + new Vector3(0, 0, -1) * tocdo * Time.deltaTime;
-            }
-               
+
             anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
             anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
             anim.SetBool("chay", true);
@@ -206,33 +175,61 @@ public void Awake()
             }
         }
         
-        if (Input.GetKey(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButtonUp("len") && KTMatDat == false)// nut nhay
+        if (Input.GetKeyDown(KeyCode.S) && KTMatDat == false  || CrossPlatformInputManager.GetButton("len") && KTMatDat == false)// nut nhay
         {
+            Debug.Log("Jumped");
             
-            anim.SetBool ("nhay",true); // chạy anim nhảy
-            rigi.AddForce(new Vector2 (0, 2f ) * lucnhay, ForceMode.Force); // thêm lực cho nó nhảy
-            KTMatDat = true; 
+            anim.SetBool("nhay",true); // chạy anim nhảy
+            rigi.AddForce(new Vector2 (0, 2f ) * lucnhay, ForceMode.Impulse); // thêm lực cho nó nhảy
+            KTMatDat = true;
+            tg = 0.2f;
         }
-        
+        if (tg > 0)
+        {
+            tg -= Time.deltaTime;
+        }
        
     }
-    private void OnCollisionStay(Collision collision) // check mat dat . chạm mặt đất mới cho nhảy
+    
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "KTMatDat")
         {
-            KTMatDat = false;
-            anim.SetBool("nhay", false);
+            
+            if (tg <= 0)
+            {
+                anim.SetBool("nhay", false);
+                
+                KTMatDat = false;
+            }
+
         }
     }
-    public void TocBien(int x) // gọi hàm này thì Player tốc biến
-    {
-        player.instance.transform.position += new Vector3(x, 0, 0) * tocdoTB * Time.deltaTime;
-    }
+   
     public void savegame() //hàm này là để savegame
     {
         PlayerPrefs.SetInt("manchoi", SceneManager.GetActiveScene().buildIndex);
+  
         Debug.Log(PlayerPrefs.GetInt("manchoi"));
     }
-    
+    public void Reset()
+    {
+        tancongmatmau.mau = tancongmatmau.maxMau;
+    }
+    private void FixedUpdate()
+    {
+        if (phai)
+        {
+            rigi.MovePosition(transform.position + sangphai * tocdo );
+            phai = false;
+        }
+        else if (trai)
+        {
+            rigi.MovePosition(transform.position + sangtrai * tocdo);
+            trai = false;
+        }
+
+    }
+
 
 }

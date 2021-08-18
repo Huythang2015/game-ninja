@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class kiemsi : MonoBehaviour
 {
+    public Animator anim;
     bool chieu2 = false; 
     bool chieu1 = false;
     public Transform Diemchieu1;
@@ -16,6 +17,8 @@ public class kiemsi : MonoBehaviour
     public static kiemsi instance;
     float khoangcach;
     Vector3 vitriBD;
+    public GameObject chancau;
+    public GameObject quaman;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,11 +125,14 @@ public class kiemsi : MonoBehaviour
         mau -= dam; 
         if (mau <= 0)
         {
+            quaman.SetActive(true);
+            Destroy(chancau, 5);
             Destroy(gameObject);
         }
     }
     public void Reset()
     {
+        
         mau = maxMau;
         gameObject.SetActive(false);
     }
@@ -134,6 +140,7 @@ public class kiemsi : MonoBehaviour
     {
         Gizmos.DrawWireSphere(Diemchieu1.position, phamvichieu1);
         Gizmos.DrawWireSphere(diemChieu2.position, phamViChieu2);
+
 
     }
 

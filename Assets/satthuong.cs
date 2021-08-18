@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class satthuong : MonoBehaviour
 {
     public float mau;
     public Animator anim;
-    public static satthuong instance; 
+    public static satthuong instance;
+    public congngoai congngoai;
    
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,13 @@ public class satthuong : MonoBehaviour
         }
         if (mau <= 0)
         {
-            Destroy(gameObject.transform.parent.parent.gameObject);
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("man1"))
+            {
+                congngoai.linhchet();
+            }
+           
+            Destroy(gameObject.transform.parent.gameObject);
+           
         }
   
     }

@@ -15,6 +15,9 @@ public class tanCongVaMatMau : MonoBehaviour
     public LayerMask layerKeThu;
     public static tanCongVaMatMau instance;
     public Scene lever1;
+    public Animator anim;
+    public Transform viTriLuu;
+
     
     private void Awake()
     {
@@ -96,15 +99,15 @@ public class tanCongVaMatMau : MonoBehaviour
     }
     public void satthuong(float dam)
     {
-        
+        anim.Play("choang");
         mau -= dam;
         thanhmau.value = mau;
         if (mau <= 0) // su ly hoi sinh
         {
             if (SceneManager.GetActiveScene() == lever1) // neu o man1 thi xoa player
             {
-                Destroy(gameObject.transform.parent.gameObject);
-                SongLai.instance.HoiSinh();
+              
+                SongLai.instance.HoiSinh(viTriLuu.position);
 
             }
             else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
@@ -128,5 +131,17 @@ public class tanCongVaMatMau : MonoBehaviour
     {
         Gizmos.DrawWireSphere(diemChem.position, phamViChem);
     }
-    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "diemLuu")
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Debug.Log(other.name);
+                viTriLuu = other.transform;
+            }
+           
+        }
+    }
+
 }
