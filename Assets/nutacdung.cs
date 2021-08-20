@@ -35,7 +35,7 @@ public class nutacdung : StateMachineBehaviour
         if (time <= 0)
         {
 
-            if (khoangcach <= 3)
+            if (khoangcach <= 2)
             {
 
                 if (so == 0)

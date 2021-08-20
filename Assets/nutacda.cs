@@ -32,7 +32,7 @@ public class nutacda : StateMachineBehaviour
         khoangcach = Vector2.Distance(vitriPlayer, animator.transform.position);
         time -= Time.deltaTime;
         
-        if (khoangcach > 3)
+        if (khoangcach > 2)
         {
             if (so == 0)
             {
@@ -54,7 +54,7 @@ public class nutacda : StateMachineBehaviour
         if (time <= 0)
         {
 
-            if (khoangcach <= 3)
+            if (khoangcach <= 2)
             {
 
                 if (so == 0)

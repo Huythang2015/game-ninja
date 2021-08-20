@@ -35,7 +35,7 @@ public class nutacduoi : StateMachineBehaviour
         vitriPlayer = player.instance.transform.position;
         khoangcach = Vector2.Distance(vitriPlayer, animator.transform.position);
         time -= Time.deltaTime;
-        if (khoangcach <= 3)
+        if (khoangcach <= 2)
         {
 
             if (so == 0)
@@ -57,7 +57,7 @@ public class nutacduoi : StateMachineBehaviour
         {
 
             
-            if (khoangcach > 3)
+            if (khoangcach > 2)
             {
                 if (so == 0)
                 {

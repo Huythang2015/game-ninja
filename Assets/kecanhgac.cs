@@ -158,6 +158,7 @@ public class kecanhgac : MonoBehaviour
                 
                 if (Player.tag == "KhuVucChiuSatThuong")
                 {
+                    amthanh.PlayAmThanh("enemychem");
                     Debug.Log(Player.name);
                     //player.instance.transform.GetComponent<tanCongVaMatMau>().satthuong(10);
                     player.instance.GetComponent<tanCongVaMatMau>().satthuong(10);
