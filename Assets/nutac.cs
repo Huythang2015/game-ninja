@@ -18,6 +18,9 @@ public class nutac : MonoBehaviour
     public LayerMask layerPlayer;
     public ParticleSystem vetchem , vetda;
     public static nutac instance;
+    bool xien;
+    
+    public Transform vitriXien;
     void Start()
     {
         instance = this;
@@ -61,9 +64,24 @@ public class nutac : MonoBehaviour
             Collider[] Player = Physics.OverlapSphere(ViTriChem.position, PhamViChem, layerPlayer);
             foreach(Collider player in Player)
             {
+                amthanh.PlayAmThanh("enemychem");
                 tanCongVaMatMau.instance.satthuong(10);
                 ngungchem();
                 stopda();
+            }
+        }
+        if (xien == true)
+        {
+            Collider[] Player = Physics.OverlapBox (vitriXien.position, vitriXien.localScale);
+            foreach(Collider player in Player)
+            {
+                if (player.tag == "KhuVucChiuSatThuong")
+                {
+                    amthanh.PlayAmThanh("enemychem");
+                    tanCongVaMatMau.instance.satthuong(10);
+                    stopxienkiem();
+                }
+               
             }
         }
     }
@@ -80,6 +98,15 @@ public class nutac : MonoBehaviour
     {
         chem = false;
     }
+    public void xienkiem()
+    {
+        xien = true;
+    }
+    public void stopxienkiem()
+    {
+        xien = false;
+    }
+
     public void kichhoatda()
     {
         da = true;
@@ -91,6 +118,7 @@ public class nutac : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(ViTriChem.position, PhamViChem);
+        Gizmos.DrawWireCube(vitriXien.position, vitriXien.localScale);
     }
    
 

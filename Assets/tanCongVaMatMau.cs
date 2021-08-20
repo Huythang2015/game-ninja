@@ -53,6 +53,7 @@ public class tanCongVaMatMau : MonoBehaviour
                 {
                     if ( enemy.GetComponent<satthuong>() != null)
                     {
+                        amthanh.PlayAmThanh("chemchung");
                         enemy.GetComponent<satthuong>().matMau(10);
                         ngungChem();
                     }
@@ -66,14 +67,17 @@ public class tanCongVaMatMau : MonoBehaviour
             {
                 if (enemy.tag == "enemy")
                 {
+                    amthanh.PlayAmThanh("chemchung");
                     if (enemy.GetComponent<kiemsi>() != null)
                     {
+                        
                         enemy.GetComponent<kiemsi>().matMau(10);
                         ngungChem();
                         
                     }
                     if (enemy.GetComponent<lintrang>() != null)
                     {
+                      
                         enemy.GetComponent<lintrang>().matMau(10);
                     }
 
@@ -103,6 +107,7 @@ public class tanCongVaMatMau : MonoBehaviour
         anim.Play("choang");
         mau -= dam;
         thanhmau.value = mau;
+        
         if (mau <= 0) // su ly hoi sinh
         {
             if (SceneManager.GetActiveScene() == lever1) // neu o man1 thi xoa player
@@ -113,7 +118,7 @@ public class tanCongVaMatMau : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2))
             {
-                songlaiman2.instance.hoisinh();
+                songlaiman2.instance.hoisinh(viTriLuu);
                 
             }
 

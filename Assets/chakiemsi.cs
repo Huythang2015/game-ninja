@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class chakiemsi : MonoBehaviour
 {
     float khoangcach;
@@ -10,6 +11,7 @@ public class chakiemsi : MonoBehaviour
     public float tocdodive;
     float khoangcachvitriBD;
     public GameObject linhtrang;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +28,15 @@ public class chakiemsi : MonoBehaviour
         khoangcachvitriBD = Vector3.Distance(kiemsi. transform.position, vitriBD);
         if (khoangcach <= 50) // khi khoảng cách vs player mà nhỏ hơn hoặc = 50 thì
         {
+            if (kiemsi.GetComponent<kiemsi>().slidermau.gameObject.active == false)
+            {
+                kiemsi.GetComponent<kiemsi>().slidermau.gameObject.SetActive(true);
+            }
             if (kiemsi.gameObject.active == false)
             {
                 kiemsi.gameObject. SetActive(true);
                 kiemsi.transform.position = vitriBD;
+               
             }
             if (linhtrang != null)
             {

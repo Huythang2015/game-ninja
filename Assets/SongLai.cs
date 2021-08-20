@@ -32,14 +32,18 @@ public class SongLai : MonoBehaviour
     public void HoiSinh(Vector3 vitriLuu)
     {
         player.instance.transform.position = vitriLuu;
-        player.instance.Reset(); // resetplayer;
+        if (player.instance.transform.position == vitriLuu)
+        {
+            player.instance.Reset(); // resetplayer;
+        }
         satthuong.instance.Reset();
         conglon.instance.Reset();
+
         if (satthuong.instance.gameObject != null)
         {
             satthuongtac.instance.Reset();
         }
         
-        
+
     }
 }

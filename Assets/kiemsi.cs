@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class kiemsi : MonoBehaviour
 {
@@ -19,11 +20,15 @@ public class kiemsi : MonoBehaviour
     Vector3 vitriBD;
     public GameObject chancau;
     public GameObject quaman;
+    public Slider slidermau;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         mau = maxMau;
+        slidermau.maxValue = maxMau;
+        slidermau.value = mau;
+
         vitriBD = transform.position;
     }
 
@@ -31,7 +36,7 @@ public class kiemsi : MonoBehaviour
     void Update()
     {
         // su ly chieu
-        if (chieu1 == true)
+        if (chieu1 == true) // sat thuong chieu 1
         {
             Collider[] Player = Physics.OverlapSphere(Diemchieu1.position, phamvichieu1, layerPlayer);
             foreach(Collider player in Player)
@@ -44,7 +49,7 @@ public class kiemsi : MonoBehaviour
                
             }
         }
-        if (chieu2 == true)
+        if (chieu2 == true) // sat thuong chieu 2
         {
             Collider[] Player = Physics.OverlapSphere(diemChieu2.position, phamViChieu2, layerPlayer);
             foreach (Collider player in Player)
@@ -52,7 +57,7 @@ public class kiemsi : MonoBehaviour
                 if (player.transform.parent.GetComponent<tanCongVaMatMau>() != null)
                 {
                     player.transform.parent.GetComponent<tanCongVaMatMau>().satthuong(10);
-                    stopchieu1();
+                    stopchieu2();
                 }
 
             }
@@ -122,19 +127,28 @@ public class kiemsi : MonoBehaviour
     }
     public void matMau(int dam)
     {
-        mau -= dam; 
+        anim.SetTrigger("choang");
+        mau -= dam;
+        slidermau.value = mau;
+      
         if (mau <= 0)
         {
             quaman.SetActive(true);
             Destroy(chancau, 5);
             Destroy(gameObject);
+            Destroy(slidermau);
         }
     }
     public void Reset()
     {
-        
         mau = maxMau;
+       
+
+        slidermau.value = mau;
+
+       
         gameObject.SetActive(false);
+        slidermau.gameObject.SetActive(false);
     }
     private void OnDrawGizmosSelected()
     {

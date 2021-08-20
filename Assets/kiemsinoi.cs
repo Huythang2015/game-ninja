@@ -68,7 +68,7 @@ public class kiemsinoi : MonoBehaviour
                 player.instance.tocdo = tocdothat;
                 kiemsi.GetComponent<Animator>().enabled = true;
                 linhtrang.GetComponent<Animator>().enabled = true;// anim cua kiem si duoc bat
-                gameObject.GetComponent<kiemmsinoi>().enabled = false;
+                //gameObject.GetComponent<kiemmsinoi>().enabled = false;
             }
         }
 

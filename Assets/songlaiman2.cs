@@ -6,7 +6,7 @@ public class songlaiman2 : MonoBehaviour
 {
     public lintrang linh;
     public GameObject PLayer;
-    public Transform noiHoiSinh;
+    
     public static songlaiman2 instance;
     
     // Start is called before the first frame update
@@ -17,9 +17,9 @@ public class songlaiman2 : MonoBehaviour
     }
 
   
-    public void hoisinh()
+    public void hoisinh(Transform diemluu)
     {
-        PLayer.transform.position = noiHoiSinh.position;
+        PLayer.transform.position = diemluu.position;
         if (player.instance != null)
         {
             player.instance.Reset();

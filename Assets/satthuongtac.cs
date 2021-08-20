@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,11 +28,12 @@ public class satthuongtac : MonoBehaviour
     {
        
     }
-    public void satthuong(float dam)
+    public void satthuong(float dam) // sử lý sát thương
     {
         anim.SetTrigger("bidau");
         mau -= dam;
         thanhmau.value = mau;
+        
         if (mau <= 0)
         {
             Destroy(gameObject);
