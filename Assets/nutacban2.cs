@@ -45,7 +45,7 @@ public class nutacban2 : StateMachineBehaviour
         vitriPlayer = player.instance.transform.position;
         khoangcach = Vector2.Distance(vitriPlayer, animator.transform.position);
         time -= Time.deltaTime;
-
+        
         
     }
 

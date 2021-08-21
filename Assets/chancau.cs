@@ -5,6 +5,7 @@ using UnityEngine;
 public class chancau : MonoBehaviour
 {
     bool bat;
+    public GameObject thanhmaukiemsi;
 
     // Update is called once per frame
     void Update()
@@ -16,6 +17,10 @@ public class chancau : MonoBehaviour
                 gameObject.GetComponent<BoxCollider>().enabled = true;
                 transform.GetChild(0).gameObject.SetActive(true);
                 bat = true;
+                if (thanhmaukiemsi.active == false)
+                {
+                    thanhmaukiemsi.SetActive(true);
+                }
             }
           
             
@@ -27,6 +32,10 @@ public class chancau : MonoBehaviour
                 gameObject.GetComponent<BoxCollider>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(false);
                 bat = false;
+                if (thanhmaukiemsi.active == true)
+                {
+                    thanhmaukiemsi.SetActive(false);
+                }
             }
           
         }

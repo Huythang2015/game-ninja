@@ -43,6 +43,7 @@ public class kiemsi : MonoBehaviour
             {
                 if (player.transform.parent.GetComponent<tanCongVaMatMau>() != null)
                 {
+                    amthanh.PlayAmThanh("enemychem");
                     player.transform.parent.GetComponent<tanCongVaMatMau>().satthuong(10);
                     stopchieu1();
                 }
@@ -56,6 +57,7 @@ public class kiemsi : MonoBehaviour
             {
                 if (player.transform.parent.GetComponent<tanCongVaMatMau>() != null)
                 {
+                    amthanh.PlayAmThanh("enemychem");
                     player.transform.parent.GetComponent<tanCongVaMatMau>().satthuong(10);
                     stopchieu2();
                 }
@@ -130,7 +132,7 @@ public class kiemsi : MonoBehaviour
         anim.SetTrigger("choang");
         mau -= dam;
         slidermau.value = mau;
-      
+       
         if (mau <= 0)
         {
             quaman.SetActive(true);

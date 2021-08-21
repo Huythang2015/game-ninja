@@ -28,10 +28,7 @@ public class chakiemsi : MonoBehaviour
         khoangcachvitriBD = Vector3.Distance(kiemsi. transform.position, vitriBD);
         if (khoangcach <= 50) // khi khoảng cách vs player mà nhỏ hơn hoặc = 50 thì
         {
-            if (kiemsi.GetComponent<kiemsi>().slidermau.gameObject.active == false)
-            {
-                kiemsi.GetComponent<kiemsi>().slidermau.gameObject.SetActive(true);
-            }
+            
             if (kiemsi.gameObject.active == false)
             {
                 kiemsi.gameObject. SetActive(true);

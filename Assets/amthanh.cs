@@ -19,10 +19,10 @@ public class amthanh : MonoBehaviour
     {
         switch (tenAT)
         {
-            case ("chemchung"):
+            case ("chemchung"): // player chém chúng enemy
                 loa.PlayOneShot(playerchem);
                 break;
-            case ("enemychem"):
+            case ("enemychem"): // enemy chem chúng player
                 loa.PlayOneShot(enemychem);
                 break;
             case ("minno"):
