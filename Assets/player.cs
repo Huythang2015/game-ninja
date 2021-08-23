@@ -49,6 +49,7 @@ public class player : MonoBehaviour
     public LayerMask layerPhatHien;
     public GameObject enemygannhat = null;
     float khoangcachvsenemy = Mathf.Infinity;
+    bool xoayphaikhidanh;
     public void Awake()
     {
         instance = this;
@@ -98,10 +99,6 @@ public class player : MonoBehaviour
                         anim.Play("tocbien");
                         TGCho = 3;
                         //rigi.AddForce(new Vector3(tocdoTB, 0, 0) * Time.deltaTime,ForceMode.Impulse);
-                      
-                   
-
-
                 }
             }
         }
@@ -112,31 +109,71 @@ public class player : MonoBehaviour
         if (Input.GetKey(KeyCode.C) || x > 0) // xoay sang phai
         {
             transform.position = transform.position + new Vector3(1, 0, 0).normalized * tocdo * Time.deltaTime;            
-            anim.SetBool("chay", true);
+           
          
           if (enemygannhat == null) // nếu enemygannhat = null thì mới được xoay tự do
             {
+                // xoay vfx cho phù hợp vs Player
+                if (xoayTronDoi.zMultiplier > 0)
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+                if (xoayTronDoi2.zMultiplier < 0)
+                {
+                    xoayTronDoi2.zMultiplier *= -1;
+                }
+                anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
+                anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+
+                anim.SetBool("chay", true);
+                anim.SetBool("chaylui", false);
                 Debug.Log("null");
                 if (transform.localScale.x < 0)
                 {
+                   
                     transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                 }
                   
             }
+          else
+            {
+                if (xoayphaikhidanh == true)
+                {
+                    anim.SetBool("chay", true);
+                    anim.SetBool("chaylui", false);
+                    // xoay vfx cho phù hợp vs Player
+                    if (xoayTronDoi.zMultiplier > 0)
+                    {
+                        xoayTronDoi.zMultiplier *= -1;
+                    }
+                    if (xoayTronDoi2.zMultiplier < 0)
+                    {
+                        xoayTronDoi2.zMultiplier *= -1;
+                    }
+                    anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
+                    anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+                }
+                else
+                {
+                    anim.SetBool("chay", false);
+                    anim.SetBool("chaylui", true);
+
+                    if (xoayTronDoi.zMultiplier < 0) // xoay vfx
+                    {
+                        xoayTronDoi.zMultiplier *= -1;
+                    }
+                    if (xoayTronDoi2.zMultiplier > 0) // xoay vfx
+                    {
+                        xoayTronDoi2.zMultiplier *= -1;
+                    }
+                    anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+                    anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
+                }
+            }
 
            
             
-            // xoay vfx cho phù hợp vs Player
-            if (xoayTronDoi.zMultiplier > 0)
-            {
-                xoayTronDoi.zMultiplier *= -1;
-            }
-            if (xoayTronDoi2.zMultiplier < 0)
-            {
-                xoayTronDoi2.zMultiplier *= -1;
-            }
-            anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
-            anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+           
         }
         else if (Input.GetKey(KeyCode.Z) || x < 0) //bam nut z de sang trai dong thoi quay sang trai
         {
@@ -144,33 +181,74 @@ public class player : MonoBehaviour
             transform.position = transform.position + new Vector3(-1, 0, 0) * tocdo * Time.deltaTime;
 
             
-            anim.SetBool("chay", true);
+           
             if (enemygannhat == null)// nếu enemygannhat = null thì mới được xoay tự do
             {
-               
+                // xoay vfx theo Player
+                if (xoayTronDoi.zMultiplier < 0) // xoay vfx
+                {
+                    xoayTronDoi.zMultiplier *= -1;
+                }
+                if (xoayTronDoi2.zMultiplier > 0) // xoay vfx
+                {
+                    xoayTronDoi2.zMultiplier *= -1;
+                }
+                anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+                anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
+
+                anim.SetBool("chay", true);
+                anim.SetBool("chaylui", false);
                 if (transform.localScale.x > 0)
                 {
+                    
                     transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                 }
                    
             }
-            
-            
-            // xoay vfx theo Player
-            if ( xoayTronDoi.zMultiplier < 0) // xoay vfx
+            else
             {
-                xoayTronDoi.zMultiplier *= -1;
+                if (xoayphaikhidanh == true)
+                {
+                    anim.SetBool("chay", false);
+                    anim.SetBool("chaylui", true);
+
+                    // xoay vfx cho phù hợp vs Player
+                    if (xoayTronDoi.zMultiplier > 0)
+                    {
+                        xoayTronDoi.zMultiplier *= -1;
+                    }
+                    if (xoayTronDoi2.zMultiplier < 0)
+                    {
+                        xoayTronDoi2.zMultiplier *= -1;
+                    }
+                    anhSangKiem.localRotation = Quaternion.Euler(0, 0, 9.57f);
+                    anhsangXia.localScale = new Vector3(1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+                }
+                else
+                {
+                    anim.SetBool("chay", true);
+                    anim.SetBool("chaylui", false);
+
+                    if (xoayTronDoi.zMultiplier < 0) // xoay vfx
+                    {
+                        xoayTronDoi.zMultiplier *= -1;
+                    }
+                    if (xoayTronDoi2.zMultiplier > 0) // xoay vfx
+                    {
+                        xoayTronDoi2.zMultiplier *= -1;
+                    }
+                    anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
+                    anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
+                }
             }
-            if (xoayTronDoi2.zMultiplier > 0) // xoay vfx
-            {
-                xoayTronDoi2.zMultiplier *= -1;
-            }
-            anhsangXia.localScale = new Vector3(-1, anhsangXia.localScale.y, anhsangXia.localScale.z);
-            anhSangKiem.localRotation = Quaternion.Euler(0, 0, -9.57f);
+
+
+            
         }
         else
         {
             anim.SetBool("chay", false);
+            anim.SetBool("chaylui", false);
         }
 
         // sử lý việc đánh. hết tg hồi đánh thì ms đc đánh
@@ -281,17 +359,20 @@ public class player : MonoBehaviour
     }
     void xoaytheoenemy() // xoay theo enemy gần nhất
     {
-        if (enemygannhat.transform.position.x > transform.position.x)
+        if (enemygannhat.transform.position.x > transform.position.x) // nếu người chơi đứng bên trái enemy gần nhất thì
         {
+            xoayphaikhidanh = true; // player xoay phải = true;
             if (transform.localScale.x < 0)
-            {
+            {            
                 transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             }          
         }
         else
         {
+            xoayphaikhidanh = false; // player đang xoay trái
             if (transform.localScale.x > 0)
             {
+                
                 transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             }
         }
