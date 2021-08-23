@@ -63,11 +63,12 @@ public class tanCongVaMatMau : MonoBehaviour
                 
             }
             Collider[] khuvucchem = Physics.OverlapSphere(diemChem.position, phamViChem, layerKeThu);
+            
             foreach (Collider enemy in khuvucchem)  // kiem tra eney nao trong khu vuc chem
             {
                 if (enemy.tag == "enemy")
                 {
-                    amthanh.PlayAmThanh("chemchung");
+                    
                     if (enemy.GetComponent<kiemsi>() != null)
                     {
                         

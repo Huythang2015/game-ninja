@@ -11,7 +11,7 @@ public class chemm1 : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        tocdobandau = player.instance.tocdo;
+        tocdobandau = player.instance.tocdobandau;
         if (animator.GetBool("nhay") == false)
         {
 
@@ -35,6 +35,10 @@ public class chemm1 : StateMachineBehaviour
         {
             animator.SetBool("chem1", false);
 
+        }
+        if (player.instance.tocdo != 0)
+        {
+            player.instance.tocdo = 0;
         }
     }
 

@@ -19,7 +19,7 @@ public class chem : StateMachineBehaviour
 
         animator.SetBool("chem1", false);
         animator.SetBool("chem", false);
-
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,10 +46,7 @@ public class chem : StateMachineBehaviour
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+  
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

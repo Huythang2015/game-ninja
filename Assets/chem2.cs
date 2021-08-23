@@ -12,7 +12,7 @@ public class chem2 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        tocdobandau = player.instance.tocdo;
+        tocdobandau = player.instance.tocdobandau;
         if (animator.GetBool("nhay") == false)
         {
 
@@ -38,6 +38,11 @@ public class chem2 : StateMachineBehaviour
             animator.SetBool("chem1", false);
             set = false;
         }
+        if ( player.instance.tocdo != 0)
+        {
+            player.instance.tocdo = 0;
+        }
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

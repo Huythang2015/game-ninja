@@ -24,6 +24,7 @@ public class danchuyen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         chem.SetActive(false);
         Debug.Log("an");
         chuHien.text = "";
