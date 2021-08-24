@@ -150,7 +150,7 @@ public class kiemsi : MonoBehaviour
 
        
         gameObject.SetActive(false);
-        slidermau.gameObject.SetActive(false);
+        
     }
     private void OnDrawGizmosSelected()
     {

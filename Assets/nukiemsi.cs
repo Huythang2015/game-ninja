@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class nukiemsi : MonoBehaviour
 {
@@ -11,17 +12,25 @@ public class nukiemsi : MonoBehaviour
     public Transform ViTrichieu1;
     public float phamvichhieu1;
     public LayerMask playerLayer;
+    public GameObject dan;
+    public Transform vitriBan;
+    public GameObject chan1;
+    public Slider thanhMau;
+    
     // Start is called before the first frame update
     void Start()
     {
         viTriplayer = GameObject.Find("nhanvat").transform;
         mau = maxmau;
+        thanhMau.maxValue = maxmau;
+        thanhMau.value = mau;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (viTriplayer.position.x > transform.position.x + 1)
+        if (transform.position.x < viTriplayer.position.x -2)
         {
             if (transform.localScale.x < 0)
             {
@@ -29,7 +38,7 @@ public class nukiemsi : MonoBehaviour
             }
           
         }
-        else if (viTriplayer.position.x < transform.position.x - 1)
+        else if (transform.position.x > viTriplayer.position.x + 2)
         {
             if (transform.localScale.x > 0)
             {
@@ -57,8 +66,10 @@ public class nukiemsi : MonoBehaviour
     public void truMau(int dam)
     {
         mau -= dam;
+        thanhMau.value = mau;
         if (mau <= 0)
         {
+            Destroy(chan1, 3);
             Destroy(gameObject);
         }
     }
@@ -73,5 +84,14 @@ public class nukiemsi : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(ViTrichieu1.position, phamvichhieu1);
+    }
+    public void bandan()
+    { 
+        Instantiate(dan, vitriBan.position, dan.transform.rotation);
+    }
+    public void Reset()
+    {
+        mau = maxmau;
+        thanhMau.value = mau;
     }
 }

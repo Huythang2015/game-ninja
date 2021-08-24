@@ -352,7 +352,7 @@ public class player : MonoBehaviour
             {             
                 enemygannhat = enemy.gameObject;
                 khoangcachvsenemy = sodotam;
-                Debug.Log(sodotam + enemygannhat.name);
+               // Debug.Log(sodotam + enemygannhat.name);
             }          
         }      
         return enemygannhat;

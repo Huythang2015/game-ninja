@@ -18,6 +18,7 @@ public class tanCongVaMatMau : MonoBehaviour
     public Scene lever1;
     public Animator anim;
     public Transform viTriLuu;
+    public GameObject songLai;
 
     
     private void Awake()
@@ -71,37 +72,34 @@ public class tanCongVaMatMau : MonoBehaviour
                     
                     if (enemy.GetComponent<kiemsi>() != null)
                     {
-                        
+                        amthanh.PlayAmThanh("chemchung");
                         enemy.GetComponent<kiemsi>().matMau(10);
                         ngungChem();
                         
                     }
                     if (enemy.GetComponent<lintrang>() != null)
                     {
-                      
+                        amthanh.PlayAmThanh("chemchung");
                         enemy.GetComponent<lintrang>().matMau(10);
+                    }
+                    if (enemy.GetComponent<satthuongtac>() != null)
+                    {
+                       
+                        amthanh.PlayAmThanh("chemchung");
+                        enemy.GetComponent<satthuongtac>().satthuong(10);
+                        ngungChem();
+                    }
+                    if (enemy.GetComponent<nukiemsi>() != null)
+                    {
+                        amthanh.PlayAmThanh("chemchung");
+                        enemy.GetComponent<nukiemsi>().truMau(10);
+                        ngungChem();
                     }
 
                 }
             }
         }
-        if (choChem == true)
-        {
-            Collider[] KhuVucChem = Physics.OverlapSphere (diemChem.position, phamViChem, layerKeThu);
-            foreach (Collider enemy in KhuVucChem)
-            {
-                if (enemy.GetComponent<satthuongtac>() != null)
-                {
-                    if (enemy.tag == "enemy")
-                    {
-                        enemy.GetComponent<satthuongtac>().satthuong(10);
-                        ngungChem();
-                    }
-                   
-                }
-            }
-            // kiem tra enemy nao trong khu vuc chem 
-        }
+       
     }
     public void satthuong(float dam)
     {
@@ -121,6 +119,12 @@ public class tanCongVaMatMau : MonoBehaviour
             {
                 songlaiman2.instance.hoisinh(viTriLuu);
                 
+            }
+            else
+            {
+               
+                songLai.GetComponent<hoisinhman3>().hoisinh(viTriLuu);
+               
             }
 
 
@@ -142,14 +146,13 @@ public class tanCongVaMatMau : MonoBehaviour
     {
         if (other.tag == "diemLuu")
         {
-            if (CrossPlatformInputManager.GetButton("danh"))
-            {
+           
                 if (other.transform != viTriLuu)
                 {
                     Debug.Log(other.name);
                     viTriLuu = other.transform;
                 }
-            }           
+                      
         }
     }
 

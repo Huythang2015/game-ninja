@@ -24,6 +24,7 @@ public class binhMau : MonoBehaviour
             binhmau -= 1;
             tanCongVaMatMau.instance.mau += 50;
             tanCongVaMatMau.instance.thanhmau.value = tanCongVaMatMau.instance.mau;
+            sobinh.text = "" + binhmau;
             if (tanCongVaMatMau.instance.mau > 100)
             {
                 tanCongVaMatMau.instance.mau = tanCongVaMatMau.instance.maxMau;

@@ -15,12 +15,13 @@ public class laothoichieu1NKS : StateMachineBehaviour
         vitriplayer = GameObject.Find("nhanvat").transform; // tranfrom cua player
         rigi = animator.GetComponent<Rigidbody>(); //  rigi cua nukiem
         nukiemsi = animator.GetComponent<nukiemsi>();
+        huong = (vitriplayer.position - rigi.position).normalized * tocdo;// huong lao toi
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        huong = (vitriplayer.position - rigi.position).normalized * tocdo;// huong lao toi
+        
         animator.transform.Translate(huong); // lao toi
         if (rigi.position.y < vitriplayer.position.y + 1) // lao den noi thi 
         {
