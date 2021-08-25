@@ -79,7 +79,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4575,7 +4575,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a2a85d891cec8134d9eeafb74e9f624a, type: 2}
-  - {fileID: 2100000, guid: a2a85d891cec8134d9eeafb74e9f624a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4820,7 +4819,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -9534,7 +9533,6 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d9036fa56cb4c0d48a9e75dff41cffe7, type: 2}
   - {fileID: 2100000, guid: d9036fa56cb4c0d48a9e75dff41cffe7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

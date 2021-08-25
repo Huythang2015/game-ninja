@@ -11,8 +11,22 @@ public class chieu2NKS : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-  
-       
+        if (animator.transform.position.x < player.tranf.position.x - 1)
+        {
+            if (animator.transform.localScale.x < 0)
+            {
+                animator.transform.localScale = new Vector3(animator.transform.localScale.x * -1, animator.transform.localScale.y, animator.transform.localScale.z);
+            }
+
+        }
+        else if (animator.transform.position.x > player.tranf.position.x - 1)
+        {
+            if (animator.transform.localScale.x > 0)
+            {
+                animator.transform.localScale = new Vector3(animator.transform.localScale.x * -1, animator.transform.localScale.y, animator.transform.localScale.z);
+            }
+        }
+
         so = Random.Range(0, 3);
     }
 

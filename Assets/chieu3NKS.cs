@@ -14,6 +14,21 @@ public class chieu3NKS : StateMachineBehaviour
         rigi = animator.GetComponent<Rigidbody>(); //  rigi cua nukiem 
         rigi.isKinematic = true;
         so = Random.Range(0, 3);
+        if (animator.transform.position.x < player.tranf.position.x - 1)
+        {
+            if (animator.transform.localScale.x < 0)
+            {
+                animator.transform.localScale = new Vector3(animator.transform.localScale.x * -1, animator.transform.localScale.y, animator.transform.localScale.z);
+            }
+
+        }
+        else if (animator.transform.position.x > player.tranf.position.x - 1)
+        {
+            if (animator.transform.localScale.x > 0)
+            {
+                animator.transform.localScale = new Vector3(animator.transform.localScale.x * -1, animator.transform.localScale.y, animator.transform.localScale.z);
+            }
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

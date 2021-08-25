@@ -95,8 +95,15 @@ public class tanCongVaMatMau : MonoBehaviour
                         enemy.GetComponent<nukiemsi>().truMau(10);
                         ngungChem();
                     }
+                    if (enemy.GetComponent<quaivat2dau>() != null)
+                    {
+                        amthanh.PlayAmThanh("chemchung");
+                        enemy.GetComponent<quaivat2dau>().matMau(10);
+                        ngungChem();
+                    }
 
                 }
+              
             }
         }
        

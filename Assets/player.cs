@@ -16,7 +16,7 @@ public class player : MonoBehaviour
     public float lucnhay;
     public float tocdo;
     public Rigidbody rigi;
-    public Transform tranf;
+    public static Transform tranf;
     public static player instance;
    
     public Animator anim;
@@ -52,6 +52,7 @@ public class player : MonoBehaviour
     bool xoayphaikhidanh;
     public void Awake()
     {
+        tranf = transform;
         instance = this;
         thanhTocBien = GameObject.FindWithTag("UI").transform.Find("thanh"). Find("thanhTocBien").GetComponent<Slider>();
     }

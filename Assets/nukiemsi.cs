@@ -30,22 +30,7 @@ public class nukiemsi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < viTriplayer.position.x -2)
-        {
-            if (transform.localScale.x < 0)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            }
-          
-        }
-        else if (transform.position.x > viTriplayer.position.x + 2)
-        {
-            if (transform.localScale.x > 0)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            }
-
-        }
+      
         if (chieu1 == true)
         {
             Collider[] khuVucChem = Physics.OverlapSphere(ViTrichieu1 .position, phamvichhieu1, playerLayer);

@@ -17,7 +17,23 @@ public class dungNKS : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        
+        
         so = Random.Range(soMin, soMax);
+        if (animator. transform.position.x < player.instance.transform .position.x - 1)
+        {
+            if (animator.transform.localScale.x < 0)
+            {
+               animator .transform.localScale = new Vector3(animator. transform.localScale.x * -1,animator. transform.localScale.y,animator. transform.localScale.z);
+            }
+
+        }
+        else if (animator.transform.position.x > player.instance.transform.position.x - 1)
+        {
+            if (animator.transform.localScale.x > 0)
+            {
+                animator.transform.localScale = new Vector3(animator.transform.localScale.x * -1, animator.transform.localScale.y, animator.transform.localScale.z);
+            }
+        }
 
     }
 
